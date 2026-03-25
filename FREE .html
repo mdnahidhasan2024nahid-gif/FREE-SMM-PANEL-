@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FREE SMM PANEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        
+        :root {
+            --primary: #8b5cf6;
+            --bg: #030303;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* --- Glow & Lighting Effects --- */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .glass {
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            padding: 2px;
+        }
+
+        .platform-btn {
+            background: #0f0f0f;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        /* Platform Specific Glows */
+        .platform-btn:nth-child(1) { box-shadow: 0 0 8px rgba(225, 48, 108, 0.4); border-color: rgba(225, 48, 108, 0.2); } /* IG */
+        .platform-btn:nth-child(2) { box-shadow: 0 0 8px rgba(24, 119, 242, 0.4); border-color: rgba(24, 119, 242, 0.2); } /* FB */
+        .platform-btn:nth-child(3) { box-shadow: 0 0 8px rgba(255, 0, 0, 0.4); border-color: rgba(255, 0, 0, 0.2); }    /* YT */
+        .platform-btn:nth-child(6) { box-shadow: 0 0 8px rgba(0, 242, 234, 0.5); border-color: rgba(0, 242, 234, 0.3); } /* TikTok */
+        .platform-btn:nth-child(9) { box-shadow: 0 0 8px rgba(36, 161, 222, 0.4); border-color: rgba(36, 161, 222, 0.2); } /* TG */
+
+        .platform-btn img {
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+            z-index: 1;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));
+        }
+
+        .top-earners-box {
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
+            border-radius: 16px;
+            padding: 10px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
+        }
+
+        .earner-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 8px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            margin-bottom: 4px;
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .input-pro {
+            background: #111 !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 10px !important;
+            padding: 10px !important;
+            font-size: 12px !important;
+            color: #fff;
+            width: 100%;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .nav-link { color: #444; transition: 0.3s; }
+        .nav-link.active { 
+            color: var(--primary); 
+            transform: scale(1.1); 
+            filter: drop-shadow(0 0 8px var(--primary));
+        }
+
+        /* Floating Button Styles */
+        #floating-verify {
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            border-radius: 50%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+            z-index: 9999;
+            cursor: move;
+            touch-action: none;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #floating-verify span {
+            font-size: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid #8b5cf6;
+            animation: ringPulse 1.5s infinite;
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; filter: brightness(1.2); } 50% { opacity: 0.5; filter: brightness(0.8); } }
+        .live-dot { width: 4px; height: 4px; background: #22c55e; border-radius: 50%; animation: pulse 1s infinite; box-shadow: 0 0 8px #22c55e; }
+
+        @keyframes slide { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .anim { animation: slide 0.3s ease-out forwards; }
+    </style>
+</head>
+<body class="max-w-md mx-auto min-h-screen flex flex-col">
+
+    <!-- Auth -->
+    <div id="auth-container" class="fixed inset-0 bg-[#030303] z-[100] flex items-center justify-center px-8">
+        <div id="login-box" class="w-full space-y-5 anim">
+            <h1 class="text-xl font-black text-center italic tracking-tighter uppercase glow-text">FREE SMM PANEL</h1>
+            <div class="glass p-6 rounded-[2rem] space-y-4">
+                <input type="text" id="log-user" placeholder="ইউজারনেম" class="input-pro">
+                <input type="password" id="log-pass" placeholder="পাসওয়ার্ড" class="input-pro">
+                <button onclick="login()" class="w-full btn-gradient py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest">Login</button>
+            </div>
+            <p class="text-center text-[10px] text-white/30">একাউন্ট নেই? <span onclick="toggleAuth('reg')" class="text-indigo-400 font-bold cursor-pointer underline glow-text">Register</span></p>
+        </div>
+
+        <div id="reg-box" class="w-full space-y-5 hidden anim">
+            <h1 class="text-xl font-black text-center italic uppercase text-indigo-500 glow-text">Sign Up</h1>
+            <div class="glass p-6 rounded-[2rem] space-y-4">
+                <input type="text" id="reg-user" placeholder="ইউজারনেম" class="input-pro">
+                <input type="password" id="reg-pass" placeholder="পাসওয়ার্ড" class="input-pro">
+                <input type="text" id="reg-ref" placeholder="রেফার কোড (যদি থাকে)" class="input-pro">
+                <button onclick="register()" class="w-full btn-gradient py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest">Register</button>
+            </div>
+            <p class="text-center text-[10px] text-white/30">একাউন্ট আছে? <span onclick="toggleAuth('log')" class="text-indigo-400 font-bold cursor-pointer underline glow-text">Login</span></p>
+        </div>
+    </div>
+
+    <!-- Floating Verifier -->
+    <div id="floating-verify">
+        <div class="pulse-ring"></div>
+        <i class="fas fa-shield-check text-xl"></i>
+        <span id="v-label">Verify</span>
+    </div>
+
+    <!-- Main Content -->
+    <div id="app-content" class="hidden flex flex-col min-h-screen">
+        <header class="p-4 flex items-center justify-between sticky top-0 bg-[#030303]/80 backdrop-blur-xl z-50 border-b border-white/5">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center shadow-[0_0_10px_rgba(139,92,246,0.5)]"><i class="fas fa-bolt text-[10px]"></i></div>
+                <span class="font-black text-xs italic tracking-tighter glow-text">FREE SMM PANEL</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="https://t.me/Cyber_Knowledge_Hub" target="_blank" class="w-7 h-7 bg-[#24A1DE]/20 rounded-full flex items-center justify-center text-[#24A1DE] border border-[#24A1DE]/20 shadow-[0_0_8px_rgba(36,161,222,0.3)]">
+                    <i class="fab fa-telegram-plane text-xs"></i>
+                </a>
+                <div class="glass px-3 py-1 rounded-full flex items-center gap-2 border border-white/10">
+                    <i class="fas fa-coins text-amber-400 text-[9px] shadow-[0_0_5px_rgba(251,191,36,0.5)]"></i>
+                    <span id="balance" class="text-[11px] font-black glow-text">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 p-3 pb-24 overflow-y-auto space-y-4">
+            <!-- Top 3 Live Earners -->
+            <div class="top-earners-box">
+                <div class="flex items-center justify-between mb-2 px-1">
+                    <div class="flex items-center gap-1.5">
+                        <div class="live-dot"></div>
+                        <span class="text-[9px] font-black uppercase tracking-widest text-white/40 italic glow-text">Live Earnings</span>
+                    </div>
+                    <span class="text-[8px] font-bold text-indigo-400 uppercase">Top 3 Today</span>
+                </div>
+                <div id="top-3-list" class="space-y-1.5"></div>
+            </div>
+
+            <!-- Mini Platforms Grid -->
+            <div class="platform-grid">
+                <button onclick="renderTasks('Instagram')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></button>
+                <button onclick="renderTasks('Facebook')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></button>
+                <button onclick="renderTasks('YouTube')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"></button>
+                <button onclick="renderTasks('Twitter')" class="platform-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png" style="filter:invert(1)"></button>
+                <button onclick="renderTasks('Spotify')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/174/174872.png"></button>
+                <button onclick="renderTasks('TikTok')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"></button>
+                <button onclick="renderTasks('LinkedIn')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"></button>
+                <button onclick="renderTasks('SoundCloud')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/145/145809.png"></button>
+                <button onclick="renderTasks('Telegram')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"></button>
+                <button onclick="renderTasks('Web')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/841/841364.png"></button>
+                <button onclick="renderTasks('Snapchat')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111615.png"></button>
+                <button onclick="renderTasks('Discord')" class="platform-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png"></button>
+            </div>
+
+            <div id="v-home" class="anim space-y-3">
+                <div id="task-container" class="space-y-2"></div>
+            </div>
+
+            <div id="v-add" class="hidden anim">
+                <div class="glass p-5 rounded-[2rem] space-y-4">
+                    <h2 class="text-[10px] font-black uppercase text-indigo-400 text-center tracking-widest glow-text">Add New Task</h2>
+                    <input type="text" id="in-name" placeholder="সার্ভিসের নাম" class="input-pro">
+                    <input type="text" id="in-link" placeholder="লিঙ্ক দিন" class="input-pro">
+                    <select id="in-qty" class="input-pro">
+                        <option value="100">100 Qty (50 PTS)</option>
+                        <option value="200">200 Qty (100 PTS)</option>
+                        <option value="500">500 Qty (300 PTS)</option>
+                        <option value="1000">1000 Qty (500 PTS)</option>
+                    </select>
+                    <button onclick="handlePublish()" class="w-full btn-gradient py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest glow-text">Publish</button>
+                </div>
+            </div>
+
+            <div id="v-ref" class="hidden anim space-y-4">
+                <div class="glass p-6 rounded-[2rem] text-center space-y-4">
+                    <div class="w-16 h-16 bg-indigo-500/10 rounded-full flex items-center justify-center mx-auto shadow-[0_0_15px_rgba(139,92,246,0.2)] border border-indigo-500/10">
+                        <i class="fas fa-gift text-2xl text-indigo-500"></i>
+                    </div>
+                    <h2 class="text-sm font-black uppercase italic tracking-widest glow-text">Refer & Earn</h2>
+                    <p class="text-[10px] text-white/40 leading-relaxed">আপনার বন্ধুদের রেফার করুন এবং প্রতি রেফারে <span class="text-indigo-400 glow-text">৪০ পয়েন্ট</span> বোনাস পান!</p>
+                    <div class="bg-black/40 p-3 rounded-xl flex items-center justify-between border border-white/5">
+                        <span id="ref-id-display" class="text-[11px] font-black tracking-[2px] text-indigo-300"></span>
+                        <button onclick="copyRef()" class="text-[9px] font-black text-white/60 uppercase glow-text">Copy Link</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto h-16 bg-[#030303]/95 backdrop-blur-2xl border-t border-white/5 flex justify-around items-center">
+            <button onclick="tab('home')" id="n-home" class="nav-link active p-4"><i class="fas fa-home"></i></button>
+            <button onclick="tab('add')" id="n-add" class="nav-link p-4"><i class="fas fa-plus-circle"></i></button>
+            <button onclick="tab('ref')" id="n-ref" class="nav-link p-4"><i class="fas fa-gift"></i></button>
+            <button onclick="logout()" class="nav-link p-4 opacity-40"><i class="fas fa-sign-out-alt"></i></button>
+        </nav>
+    </div>
+
+    <div id="toast" class="fixed top-24 left-1/2 -translate-x-1/2 bg-white text-black text-[9px] font-black px-5 py-2 rounded-full opacity-0 pointer-events-none transition-all z-[200] uppercase shadow-xl"></div>
+
+    <script>
+        let currentUser = localStorage.getItem('smm_u');
+        let users = JSON.parse(localStorage.getItem('smm_d')) || {};
+        let tasks = JSON.parse(localStorage.getItem('smm_t')) || [];
+        let devices = JSON.parse(localStorage.getItem('smm_dv')) || [];
+        
+        let activeTask = null;
+        let canVerify = false;
+        let taskStart = 0;
+
+        function getDID() { return navigator.userAgent + screen.width + screen.height; }
+
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = urlParams.get('ref');
+            if(ref) document.getElementById('reg-ref').value = ref;
+            if(currentUser && users[currentUser]) init();
+            setupDraggable();
+        }
+
+        function toggleAuth(t) {
+            document.getElementById('login-box').classList.toggle('hidden', t === 'reg');
+            document.getElementById('reg-box').classList.toggle('hidden', t === 'log');
+        }
+
+        function register() {
+            const u = document.getElementById('reg-user').value.trim();
+            const p = document.getElementById('reg-pass').value.trim();
+            const r = document.getElementById('reg-ref').value.trim();
+            const d = getDID();
+
+            if(!u || !p) return showT('তথ্য প্রদান করুন');
+            if(users[u]) return showT('ইউজারনেমটি আগে থেকেই রয়েছে');
+            if(devices.includes(d)) return showT('১ ফোনে একাধিক আইডি চলবে না');
+
+            // ১০০ পয়েন্ট সাইনআপ বোনাস
+            let startBal = 100;
+            
+            if(r && users[r]) {
+                // ৪০ পয়েন্ট রেফার বোনাস
+                users[r].balance += 40;
+                startBal += 20; 
+                showT('রেফারাল বোনাস অ্যাড হয়েছে!');
+            }
+
+            users[u] = { p, balance: startBal, d };
+            devices.push(d);
+            localStorage.setItem('smm_dv', JSON.stringify(devices));
+            save();
+            showT('সফল হয়েছে! লগইন করুন');
+            toggleAuth('log');
+        }
+
+        function login() {
+            const u = document.getElementById('log-user').value.trim();
+            const p = document.getElementById('log-pass').value.trim();
+            if(users[u] && users[u].p === p) {
+                currentUser = u;
+                localStorage.setItem('smm_u', u);
+                init();
+            } else showT('ইউজার বা পাসওয়ার্ড ভুল');
+        }
+
+        function logout() { localStorage.removeItem('smm_u'); location.reload(); }
+
+        function init() {
+            document.getElementById('auth-container').classList.add('hidden');
+            document.getElementById('app-content').classList.remove('hidden');
+            update();
+        }
+
+        function update() {
+            document.getElementById('balance').innerText = users[currentUser].balance;
+            document.getElementById('ref-id-display').innerText = currentUser.toUpperCase();
+            renderTasks();
+            renderTop3();
+        }
+
+        function renderTop3() {
+            const list = document.getElementById('top-3-list');
+            list.innerHTML = '';
+            const top3 = Object.keys(users)
+                .map(k => ({ name: k, b: users[k].balance }))
+                .sort((a,b) => b.b - a.b)
+                .slice(0, 3);
+
+            top3.forEach((u, i) => {
+                const row = document.createElement('div');
+                row.className = "earner-item anim";
+                row.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-[9px] font-black text-indigo-500">#${i+1}</span>
+                        <span class="text-[10px] font-bold text-white/70">${u.name}</span>
+                    </div>
+                    <span class="text-[10px] font-black text-white glow-text">${u.b} <span class="text-[8px] text-indigo-400">PTS</span></span>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        function tab(n) {
+            ['home', 'add', 'ref'].forEach(v => {
+                document.getElementById('v-'+v)?.classList.add('hidden');
+                document.getElementById('n-'+v).classList.remove('active');
+            });
+            document.getElementById('v-'+n).classList.remove('hidden');
+            document.getElementById('n-'+n).classList.add('active');
+            if(n === 'home') update();
+        }
+
+        function handlePublish() {
+            const n = document.getElementById('in-name').value;
+            const l = document.getElementById('in-link').value;
+            const q = parseInt(document.getElementById('in-qty').value);
+            const c = q == 100 ? 50 : q == 200 ? 100 : q == 500 ? 300 : 500;
+
+            if(!n || !l) return showT('সব তথ্য দিন');
+            if(users[currentUser].balance < c) return showT('ব্যালেন্স কম');
+
+            users[currentUser].balance -= c;
+            tasks.unshift({ id: Date.now(), n, l, q, r: Math.floor(c*0.4) });
+            save();
+            showT('পাবলিশ হয়েছে ✅');
+            tab('home');
+        }
+
+        function renderTasks(f = null) {
+            const c = document.getElementById('task-container');
+            c.innerHTML = '';
+            let l = tasks;
+            if(f) l = tasks.filter(t => t.n.toLowerCase().includes(f.toLowerCase()));
+            if(l.length === 0) {
+                c.innerHTML = '<div class="text-center py-10 opacity-10 text-[9px] font-black uppercase tracking-widest">No live tasks</div>';
+                return;
+            }
+            l.forEach(t => {
+                const d = document.createElement('div');
+                d.className = "glass p-3 rounded-xl flex items-center justify-between border-l-2 border-indigo-600 anim";
+                d.innerHTML = `
+                    <div><p class="text-[10px] font-black uppercase glow-text-white">${t.n}</p>
+                    <p class="text-[8px] text-white/30 font-bold">${t.q} Qty • <span class="text-indigo-400 glow-text">+${t.r} PTS</span></p></div>
+                    <button onclick="startTask(${t.id}, '${t.l}', ${t.r})" class="btn-gradient px-4 py-1.5 rounded-lg text-[9px] font-black uppercase">Start</button>
+                `;
+                c.appendChild(d);
+            });
+        }
+
+        function startTask(id, link, r) {
+            activeTask = { id, link, r };
+            canVerify = false;
+            taskStart = Date.now();
+            
+            const fBtn = document.getElementById('floating-verify');
+            fBtn.style.display = 'flex';
+            fBtn.style.background = 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)';
+            document.getElementById('v-label').innerText = "Verify";
+            
+            window.open(link, '_blank');
+            showT('কাজটি শেষ করে ভেরিফাই করুন');
+
+            setTimeout(() => {
+                canVerify = true;
+                fBtn.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+                fBtn.style.boxShadow = '0 0 25px rgba(34, 197, 94, 0.7)';
+                document.getElementById('v-label').innerText = "Done";
+            }, 10000);
+        }
+
+        function performVerification() {
+            if(!activeTask) return;
+            const timeDiff = (Date.now() - taskStart) / 1000;
+            if(timeDiff < 10) {
+                showT('ভুল কাজ! অন্তত ১০ সেকেন্ড সময় দিন');
+                return;
+            }
+            users[currentUser].balance += activeTask.r;
+            tasks = tasks.filter(t => t.id !== activeTask.id);
+            save();
+            update();
+            document.getElementById('floating-verify').style.display = 'none';
+            showT('আপনি +'+activeTask.r+' পয়েন্ট পেয়েছেন! 💰');
+            activeTask = null;
+        }
+
+        function save() {
+            localStorage.setItem('smm_d', JSON.stringify(users));
+            localStorage.setItem('smm_t', JSON.stringify(tasks));
+        }
+
+        function showT(m) {
+            const t = document.getElementById('toast');
+            t.innerText = m; t.classList.replace('opacity-0', 'opacity-100');
+            setTimeout(() => t.classList.replace('opacity-100', 'opacity-0'), 2500);
+        }
+
+        function copyRef() {
+            const link = window.location.origin + window.location.pathname + "?ref=" + currentUser;
+            const temp = document.createElement('input');
+            document.body.appendChild(temp);
+            temp.value = link;
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showT('রেফারাল লিঙ্ক কপি হয়েছে!');
+        }
+
+        function setupDraggable() {
+            const el = document.getElementById('floating-verify');
+            let active = false;
+            let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+            el.addEventListener("touchstart", dragStart, false);
+            el.addEventListener("touchend", dragEnd, false);
+            el.addEventListener("touchmove", drag, false);
+            function dragStart(e) {
+                initialX = e.touches[0].clientX - xOffset;
+                initialY = e.touches[0].clientY - yOffset;
+                if (e.target === el || el.contains(e.target)) active = true;
+            }
+            function dragEnd() {
+                initialX = currentX; initialY = currentY; active = false;
+                if(Math.abs(xOffset - (currentX || xOffset)) < 5) performVerification();
+            }
+            function drag(e) {
+                if (active) {
+                    e.preventDefault();
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                    xOffset = currentX; yOffset = currentY;
+                    el.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
